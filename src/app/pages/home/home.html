@@ -54,7 +54,7 @@ style="background-image: url('people.jpeg');
                background-position: center;
                min-height: 80vh;">
   <div class="container">
-    <h2 class="text-center mb-4">Popular Destinations</h2>
+    <h2 class="text-center mb-4 text-white"><strong>Popular Destinations</strong></h2>
     <div class="row text-center">
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="card shadow-sm h-100">
@@ -93,9 +93,12 @@ style="background-image: url('people.jpeg');
 </section>
 
 <!-- Famous Foods -->
-<section class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-4">Famous Foods of India</h2>
+<section class="py-5 position-relative" style="min-height: 80vh; background-image: url('food.png'); background-size: cover; background-position: center;">
+  <!-- Overlay for dimming the background -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);"></div>
+
+  <div class="container position-relative text-dark" style="z-index: 1;">
+    <h2 class="text-center mb-4 text-white"><strong>Famous Foods of India</strong></h2>
     <div class="row text-center">
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="card shadow-sm h-100">
@@ -132,6 +135,7 @@ style="background-image: url('people.jpeg');
     </div>
   </div>
 </section>
+
 
 <!-- Call to Action -->
 <section class="bg-warning text-dark text-center py-5">
