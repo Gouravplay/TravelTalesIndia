@@ -1,13 +1,56 @@
-.hero-section {
-  background-color: #f8f9fa;
-  padding: 2rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* --- General Styles --- */
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
+
+h2.fw-bold {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem !important;
+}
+
+h2.fw-bold::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--bs-primary);
+}
+
+/* --- Hero Section --- */
+.hero-bg {
+  /* CHANGED: Path now starts with / */
+  background-image: url('/assets/images/beach.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh;
+}
+
+.hero-bg h1, .hero-bg .lead {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Popular Destinations Section --- */
 .popular-destinations {
-  background: linear-gradient(135deg, #e3f2fd, #933f0c); /* light blue gradient */
-  padding: 3rem 0;
+  /* CHANGED: Path now starts with / */
+  background-image: url('/assets/images/people.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh;
 }
 
-
+/* --- Famous Foods Section --- */
+.famous-foods {
+  /* CHANGED: Path now starts with / */
+  background-image: url('/assets/images/food-texture.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 80vh;
+}
+/* ... rest of your CSS ... */

@@ -1,45 +1,4 @@
-<link rel="stylesheet" href="home.css">
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">TravelTalesIndia</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto text-center">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/destinations">Destinations</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/booking">Book a Tour</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact">Contact Us</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero-bg d-flex align-items-center text-center text-white"
-        style="background-image: url('beach.png');
-               background-size: cover;
-               background-position: center;
-               min-height: 80vh;">
+<section class="hero-bg d-flex align-items-center text-center text-white">
   <div class="container">
     <h1 class="display-4 fw-bold">Welcome to TravelTalesIndia</h1>
     <p class="lead">Discover the beauty, culture, and diversity of India</p>
@@ -47,44 +6,17 @@
   </div>
 </section>
 
-<!-- Popular Destinations -->
-<section class="popular-destinations py-5"  
-style="background-image: url('people.jpeg');
-               background-size: cover;
-               background-position: center;
-               min-height: 80vh;">
+<section class="popular-destinations py-5">
   <div class="container">
     <h2 class="text-center mb-4 text-white"><strong>Popular Destinations</strong></h2>
     <div class="row text-center">
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div *ngFor="let dest of popularDestinations" class="col-lg-4 col-md-6 mb-4">
         <div class="card shadow-sm h-100">
-          <img src="taj_mahal.png" class="card-img-top img-fluid" alt="Taj Mahal" />
+          <img [src]="dest.image" class="card-img-top img-fluid" [alt]="dest.alt" />
           <div class="card-body">
-            <h5 class="card-title">Agra - Taj Mahal</h5>
-            <p class="card-text">A symbol of love and one of the Seven Wonders of the World.</p>
-            <a routerLink="/booking" class="btn btn-primary">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-          <img src="jaipur.png" class="card-img-top img-fluid" alt="Jaipur" />
-          <div class="card-body">
-            <h5 class="card-title">Jaipur - Pink City</h5>
-            <p class="card-text">Explore forts, palaces, and vibrant Rajasthani culture.</p>
-            <a routerLink="/booking" class="btn btn-primary">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-          <img src="kerala.png" class="card-img-top img-fluid" alt="Kerala" />
-          <div class="card-body">
-            <h5 class="card-title">Kerala - God's Own Country</h5>
-            <p class="card-text">Relax in houseboats, backwaters, and lush green landscapes.</p>
-            <a routerLink="/booking" class="btn btn-primary">Book Now</a>
+            <h5 class="card-title">{{ dest.title }}</h5>
+            <p class="card-text">{{ dest.description }}</p>
+            <a [routerLink]="dest.routerLink" class="btn btn-primary">Book Now</a>
           </div>
         </div>
       </div>
@@ -92,43 +24,18 @@ style="background-image: url('people.jpeg');
   </div>
 </section>
 
-<!-- Famous Foods -->
-<section class="py-5 position-relative" style="min-height: 80vh; background-image: url('food.png'); background-size: cover; background-position: center;">
-  <!-- Overlay for dimming the background -->
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);"></div>
-
-  <div class="container position-relative text-dark" style="z-index: 1;">
+<section class="famous-foods py-5 position-relative">
+  <div class="background-overlay"></div>
+  <div class="container position-relative" style="z-index: 2;">
     <h2 class="text-center mb-4 text-white"><strong>Famous Foods of India</strong></h2>
     <div class="row text-center">
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div *ngFor="let food of famousFoods" class="col-lg-4 col-md-6 mb-4">
         <div class="card shadow-sm h-100">
-          <img src="biryani.png" class="card-img-top img-fluid" alt="Hyderabadi Biryani" />
+          <img [src]="food.image" class="card-img-top img-fluid" [alt]="food.alt" />
           <div class="card-body">
-            <h5 class="card-title">Hyderabadi Biryani</h5>
-            <p class="card-text">A rich and aromatic rice dish from Hyderabad, full of spices and flavors.</p>
-            <a href="#" class="btn btn-success">Taste It</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-          <img src="dosa.png" class="card-img-top img-fluid" alt="Masala Dosa" />
-          <div class="card-body">
-            <h5 class="card-title">Masala Dosa</h5>
-            <p class="card-text">A crispy South Indian crepe made of rice and lentils, filled with spicy potatoes.</p>
-            <a href="#" class="btn btn-success">Taste It</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-          <img src="chole_bhatura.png" class="card-img-top img-fluid" alt="Chole Bhature" />
-          <div class="card-body">
-            <h5 class="card-title">Chole Bhature</h5>
-            <p class="card-text">A popular Punjabi dish of spicy chickpeas served with fluffy fried bread.</p>
-            <a href="#" class="btn btn-success">Taste It</a>
+            <h5 class="card-title">{{ food.title }}</h5>
+            <p class="card-text">{{ food.description }}</p>
+            <a [href]="food.link" class="btn btn-success">Taste It</a>
           </div>
         </div>
       </div>
@@ -136,61 +43,65 @@ style="background-image: url('people.jpeg');
   </div>
 </section>
 
+<section class="our-services py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">Our Services</h2>
+    <p class="lead text-muted mb-5">We provide the best services to make your journey unforgettable.</p>
+    <div class="row g-4">
+       <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <div class="service-icon text-primary mb-3">
+            <i class="bi bi-briefcase-fill fs-1"></i>
+          </div>
+          <h5 class="fw-bold">Customized Packages</h5>
+          <p class="text-muted">Tailor your dream vacation with our flexible and personalized travel packages to suit your interests and budget.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <div class="service-icon text-primary mb-3">
+            <i class="bi bi-people-fill fs-1"></i>
+          </div>
+          <h5 class="fw-bold">Expert Local Guides</h5>
+          <p class="text-muted">Discover hidden gems and authentic local culture with our knowledgeable and friendly tour guides.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <div class="service-icon text-primary mb-3">
+            <i class="bi bi-headset fs-1"></i>
+          </div>
+          <h5 class="fw-bold">24/7 Customer Support</h5>
+          <p class="text-muted">Travel with peace of mind knowing our dedicated support team is available around the clock to assist you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Call to Action -->
-<section class="bg-warning text-dark text-center py-5">
+<section class="tourism-impact py-5">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">Our Tourism Impact</h2>
+      <p class="lead text-muted mb-5">We believe in responsible travel that benefits everyone.</p>
+      <div class="row g-5">
+        <div class="col-md-6">
+          <i class="bi bi-tree-fill fs-1 text-success mb-3"></i>
+          <h5 class="fw-bold">Eco-Friendly Tours</h5>
+          <p class="text-muted">We are committed to sustainable practices that protect India's natural beauty and minimize our environmental footprint.</p>
+        </div>
+        <div class="col-md-6">
+          <i class="bi bi-shop fs-1 text-warning mb-3"></i>
+          <h5 class="fw-bold">Supporting Local Communities</h5>
+          <p class="text-muted">Our tours empower local artisans, businesses, and families, ensuring that the benefits of tourism are shared by the community.</p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="bg-primary text-white text-center py-5">
   <div class="container">
     <h2 class="fw-bold">Plan Your Dream Vacation</h2>
     <p>Book tours, explore destinations, and experience the magic of India.</p>
-    <a routerLink="/booking" class="btn btn-dark btn-lg">Book a Tour</a>
+    <a routerLink="/booking" class="btn btn-warning btn-lg">Book a Tour</a>
   </div>
 </section>
-
-<!-- Footer -->
-<footer class="bg-dark text-light pt-5 pb-3">
-  <div class="container">
-    <div class="row text-center text-md-start">
-      
-      <!-- About Section -->
-      <div class="col-md-4 mb-4">
-        <h5 class="fw-bold">TravelTalesIndia</h5>
-        <p>
-          Discover the beauty, culture, and diversity of destinations across India.  
-          Your trusted travel partner for unforgettable journeys.
-        </p>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="col-md-4 mb-4">
-        <h5 class="fw-bold">Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a routerLink="/" class="text-light text-decoration-none">Home</a></li>
-          <li><a routerLink="/destinations" class="text-light text-decoration-none">Destinations</a></li>
-          <li><a routerLink="/booking" class="text-light text-decoration-none">Book a Tour</a></li>
-          <li><a routerLink="/contact" class="text-light text-decoration-none">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact Info -->
-      <div class="col-md-4 mb-4">
-        <h5 class="fw-bold">Contact Us</h5>
-        <p class="mb-1"><i class="bi bi-geo-alt-fill"></i> New Delhi, India</p>
-        <p class="mb-1"><i class="bi bi-telephone-fill"></i> +91 98765 43210</p>
-        <p><i class="bi bi-envelope-fill"></i> support@traveltalesindia.com</p>
-        <div>
-          <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="text-light me-3"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="text-light"><i class="bi bi-youtube"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <hr class="border-secondary" />
-
-    <!-- Bottom Text -->
-    <div class="text-center">
-      <p class="mb-0">&copy; 2025 TravelTalesIndia. All Rights Reserved.</p>
-    </div>
-  </div>
-</footer>

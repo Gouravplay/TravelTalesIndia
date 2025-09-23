@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Home } from './pages/home/home';
+// 1. Import RouterLink and RouterLinkActive from @angular/router
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Home],
+  standalone: true,
+  // 2. Add RouterLink and RouterLinkActive to the imports array
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

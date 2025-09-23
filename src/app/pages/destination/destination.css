@@ -1,0 +1,55 @@
+/* Apply a smooth transition to all elements for better UX */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Card Styling */
+.destination-card {
+  border-radius: 15px; /* Softer edges */
+  overflow: hidden; /* Ensures image corners are also rounded */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.destination-card:hover {
+  transform: translateY(-10px); /* Lifts the card on hover */
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.destination-card .card-img-top {
+  height: 200px;
+  object-fit: cover; /* Ensures images are not distorted */
+}
+
+.destination-card .card-body {
+  padding: 1.5rem;
+}
+
+.destination-card .card-title {
+  color: #333;
+}
+
+/* Filter Bar Styling */
+.filter-bar {
+  border: none;
+  border-radius: 12px;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+}
+
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border-color: #86b7fe;
+}
+
+/* Add icons in placeholders */
+.input-group-text {
+  border-right: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.input-group .form-control {
+  border-left: 0;
+}
