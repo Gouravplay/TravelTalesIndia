@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -18,7 +18,7 @@ export interface Destination {
 @Component({
   selector: 'app-destination',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [NgFor,CommonModule, FormsModule, RouterLink],
   templateUrl: './destination.html',
   styleUrls: ['./destination.css'],
   animations: [
@@ -34,40 +34,45 @@ export class DestinationComponent implements OnInit {
 
   allDestinations: Destination[] = [];
   filteredDestinations: Destination[] = [];
+  
+  // Filter properties
   searchTerm: string = '';
   selectedType: string = 'all';
   selectedPopularity: string = 'all';
+  
+  // Sorting property
+  selectedSort: string = 'default';
 
   ngOnInit(): void {
     this.allDestinations = [
-      { id: 1, name: 'Goa Beaches', location: 'Goa', description: 'Sun, sand, and sea. Experience the vibrant nightlife and serene beaches.', image: '/assets/images/goa.png', type: 'Beach', popularity: 'High', price: 15000 },
-      { id: 2, name: 'Himalayan Peaks', location: 'Himachal Pradesh', description: 'Trek through breathtaking landscapes and find peace in the mountains.', image: '/assets/images/himalaya.png', type: 'Mountain', popularity: 'High', price: 25000 }, // <-- CHANGED
-      { id: 3, name: 'The Taj Mahal', location: 'Agra', description: 'An ivory-white marble mausoleum, a timeless symbol of love and history.', image: '/assets/images/taj_mahal.png', type: 'Historic', popularity: 'High', price: 8000 },
-      { id: 4, name: 'Jaipur - The Pink City', location: 'Rajasthan', description: 'Explore majestic forts, vibrant markets, and rich Rajasthani culture.', image: '/assets/images/jaipur.png', type: 'Historic', popularity: 'Medium', price: 12000 },
-      { id: 5, name: 'Kerala Backwaters', location: 'Kerala', description: 'Relax on a houseboat and glide through the tranquil network of lakes and canals.', image: '/assets/images/kerala.png', type: 'Beach', popularity: 'Medium', price: 22000 },
-      { id: 6, name: 'Mumbai Metropolis', location: 'Maharashtra', description: 'The bustling financial capital, famous for Bollywood and diverse street food.', image: '/assets/images/mumbai.png', type: 'City', popularity: 'High', price: 18000 },
-      { id: 7, name: 'Rishikesh Yoga Retreats', location: 'Uttarakhand', description: 'The Yoga Capital of the World, nestled in the Himalayan foothills.', image: '/assets/images/rishikes.png', type: 'Spiritual', popularity: 'Medium', price: 17000 }, // <-- CHANGED
-      { id: 8, name: 'Varanasi Ghats', location: 'Uttar Pradesh', description: 'A spiritual city on the banks of the river Ganges with ancient rituals.', image: '/assets/images/varanasi.png', type: 'Spiritual', popularity: 'Low', price: 9000 },
-      { id: 9, name: 'Leh-Ladakh Adventure', location: 'Ladakh', description: 'A land of high passes, pristine lakes, and rugged mountains.', image: '/assets/images/ladakh.png', type: 'Mountain', popularity: 'High', price: 35000 },
-      { id: 10, name: 'Udaipur - City of Lakes', location: 'Rajasthan', description: 'Experience royal grandeur with its stunning palaces and serene lakes.', image: '/assets/images/udaipur.png', type: 'Historic', popularity: 'Medium', price: 14000 },
-      { id: 11, name: 'Andaman & Nicobar Islands', location: 'Andaman', description: 'Pristine beaches, coral reefs, and lush green forests.', image: '/assets/images/andaman.png', type: 'Beach', popularity: 'Medium', price: 30000 },
-      { id: 12, name: 'Kolkata - City of Joy', location: 'West Bengal', description: 'A city rich in culture, literature, and colonial-era architecture.', image: '/assets/images/kolkata.png', type: 'City', popularity: 'Medium', price: 11000 },
-      { id: 13, name: 'Hampi\'s Ancient Ruins', location: 'Karnataka', description: 'Explore the fascinating ruins of the Vijayanagara Empire.', image: '/assets/images/hampi.png', type: 'Historic', popularity: 'Low', price: 10000 },
-      { id: 14, name: 'Darjeeling Tea Gardens', location: 'West Bengal', description: 'Famous for its tea plantations and stunning views of Kanchenjunga.', image: '/assets/images/darjeeling.png', type: 'Mountain', popularity: 'Medium', price: 16000 },
-      { id: 15, name: 'Amritsar Golden Temple', location: 'Punjab', description: 'The holiest shrine of Sikhism, an icon of peace and equality.', image: '/assets/images/amritsar.png', type: 'Spiritual', popularity: 'High', price: 7000 },
-      { id: 16, name: 'Delhi\'s Historical Blend', location: 'Delhi', description: 'A fusion of ancient history and modernity, from Red Fort to Connaught Place.', image: '/assets/images/delhi.png', type: 'City', popularity: 'High', price: 13000 },
-      { id: 17, name: 'Spiti Valley Expedition', location: 'Himachal Pradesh', description: 'A cold desert mountain valley known for its monasteries and stark beauty.', image: '/assets/images/spiti.png', type: 'Mountain', popularity: 'Medium', price: 28000 },
-      { id: 18, name: 'Pondicherry French Quarter', location: 'Puducherry', description: 'Experience a slice of France in India with its charming colonial architecture.', image: '/assets/images/pondicerry.png', type: 'Beach', popularity: 'Low', price: 12000 }, // <-- CHANGED
-      { id: 19, name: 'Khajuraho Temples', location: 'Madhya Pradesh', description: 'Famous for its stunning temples adorned with intricate sculptures.', image: '/assets/images/kajuraho.png', type: 'Historic', popularity: 'Low', price: 9500 }, // <-- CHANGED
-      { id: 20, name: 'Ajanta & Ellora Caves', location: 'Maharashtra', description: 'Ancient rock-cut caves that are a masterpiece of religious art.', image: '/assets/images/ajanta.png', type: 'Historic', popularity: 'Medium', price: 8500 } // <-- CHANGED
+       { id: 1, name: 'Goa Beaches', location: 'Goa', description: 'Sun, sand, and sea. Experience the vibrant nightlife and serene beaches.', image: '/assets/images/goa.png', type: 'Beach', popularity: 'High', price: 15000 },
+       { id: 2, name: 'Himalayan Peaks', location: 'Himachal Pradesh', description: 'Trek through breathtaking landscapes and find peace in the mountains.', image: '/assets/images/himalaya.png', type: 'Mountain', popularity: 'High', price: 25000 },
+       { id: 3, name: 'The Taj Mahal', location: 'Agra', description: 'An ivory-white marble mausoleum, a timeless symbol of love and history.', image: '/assets/images/taj_mahal.png', type: 'Historic', popularity: 'High', price: 8000 },
+       { id: 4, name: 'Jaipur - The Pink City', location: 'Rajasthan', description: 'Explore majestic forts, vibrant markets, and rich Rajasthani culture.', image: '/assets/images/jaipur.png', type: 'Historic', popularity: 'Medium', price: 12000 },
+       { id: 5, name: 'Kerala Backwaters', location: 'Kerala', description: 'Relax on a houseboat and glide through the tranquil network of lakes and canals.', image: '/assets/images/kerala.png', type: 'Beach', popularity: 'Medium', price: 22000 },
+       { id: 6, name: 'Mumbai Metropolis', location: 'Maharashtra', description: 'The bustling financial capital, famous for Bollywood and diverse street food.', image: '/assets/images/mumbai.png', type: 'City', popularity: 'High', price: 18000 },
+       { id: 7, name: 'Rishikesh Yoga Retreats', location: 'Uttarakhand', description: 'The Yoga Capital of the World, nestled in the Himalayan foothills.', image: '/assets/images/rishikes.png', type: 'Spiritual', popularity: 'Medium', price: 17000 },
+       { id: 8, name: 'Varanasi Ghats', location: 'Uttar Pradesh', description: 'A spiritual city on the banks of the river Ganges with ancient rituals.', image: '/assets/images/varanasi.png', type: 'Spiritual', popularity: 'Low', price: 9000 },
+       { id: 9, name: 'Leh-Ladakh Adventure', location: 'Ladakh', description: 'A land of high passes, pristine lakes, and rugged mountains.', image: '/assets/images/ladakh.png', type: 'Mountain', popularity: 'High', price: 35000 },
+       { id: 10, name: 'Udaipur - City of Lakes', location: 'Rajasthan', description: 'Experience royal grandeur with its stunning palaces and serene lakes.', image: '/assets/images/udaipur.png', type: 'Historic', popularity: 'Medium', price: 14000 },
+       { id: 11, name: 'Andaman & Nicobar Islands', location: 'Andaman', description: 'Pristine beaches, coral reefs, and lush green forests.', image: '/assets/images/andaman.png', type: 'Beach', popularity: 'Medium', price: 30000 },
+       { id: 12, name: 'Kolkata - City of Joy', location: 'West Bengal', description: 'A city rich in culture, literature, and colonial-era architecture.', image: '/assets/images/kolkata.png', type: 'City', popularity: 'Medium', price: 11000 },
+       { id: 13, name: 'Hampi\'s Ancient Ruins', location: 'Karnataka', description: 'Explore the fascinating ruins of the Vijayanagara Empire.', image: '/assets/images/hampi.png', type: 'Historic', popularity: 'Low', price: 10000 },
+       { id: 14, name: 'Darjeeling Tea Gardens', location: 'West Bengal', description: 'Famous for its tea plantations and stunning views of Kanchenjunga.', image: '/assets/images/darjeeling.png', type: 'Mountain', popularity: 'Medium', price: 16000 },
+       { id: 15, name: 'Amritsar Golden Temple', location: 'Punjab', description: 'The holiest shrine of Sikhism, an icon of peace and equality.', image: '/assets/images/amritsar.png', type: 'Spiritual', popularity: 'High', price: 7000 },
+       { id: 16, name: 'Delhi\'s Historical Blend', location: 'Delhi', description: 'A fusion of ancient history and modernity, from Red Fort to Connaught Place.', image: '/assets/images/delhi.png', type: 'City', popularity: 'High', price: 13000 },
+       { id: 17, name: 'Spiti Valley Expedition', location: 'Himachal Pradesh', description: 'A cold desert mountain valley known for its monasteries and stark beauty.', image: '/assets/images/spiti.png', type: 'Mountain', popularity: 'Medium', price: 28000 },
+       { id: 18, name: 'Pondicherry French Quarter', location: 'Puducherry', description: 'Experience a slice of France in India with its charming colonial architecture.', image: '/assets/images/pondicerry.png', type: 'Beach', popularity: 'Low', price: 12000 },
+       { id: 19, name: 'Khajuraho Temples', location: 'Madhya Pradesh', description: 'Famous for its stunning temples adorned with intricate sculptures.', image: '/assets/images/kajuraho.png', type: 'Historic', popularity: 'Low', price: 9500 },
+       { id: 20, name: 'Ajanta & Ellora Caves', location: 'Maharashtra', description: 'Ancient rock-cut caves that are a masterpiece of religious art.', image: '/assets/images/ajanta.png', type: 'Historic', popularity: 'Medium', price: 8500 }
     ];
-    
-    this.filteredDestinations = this.allDestinations;
+    this.applyFilters();
   }
 
   applyFilters(): void {
-    let destinations = this.allDestinations;
+    let destinations = [...this.allDestinations];
 
+    // --- 1. FILTERING LOGIC ---
     if (this.searchTerm) {
       destinations = destinations.filter(dest =>
         dest.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -79,6 +84,22 @@ export class DestinationComponent implements OnInit {
     }
     if (this.selectedPopularity !== 'all') {
       destinations = destinations.filter(dest => dest.popularity === this.selectedPopularity);
+    }
+    
+    // --- 2. SORTING LOGIC ---
+    switch (this.selectedSort) {
+      case 'priceAsc':
+        destinations.sort((a, b) => a.price - b.price);
+        break;
+      case 'priceDesc':
+        destinations.sort((a, b) => b.price - a.price);
+        break;
+      case 'popularity':
+        const popularityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
+        destinations.sort((a, b) => popularityOrder[b.popularity] - popularityOrder[a.popularity]);
+        break;
+      default:
+        break;
     }
 
     this.filteredDestinations = destinations;

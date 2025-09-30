@@ -7,7 +7,8 @@
 
   <div class="filter-bar card shadow-sm p-3 mb-5 bg-light rounded">
     <div class="row g-3 align-items-center">
-      <div class="col-lg-6 col-md-12">
+      
+      <div class="col-lg-4 col-md-12">
         <div class="input-group">
           <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
           <input 
@@ -18,7 +19,8 @@
             (input)="applyFilters()">
         </div>
       </div>
-      <div class="col-lg-3 col-md-6">
+
+      <div class="col-lg-2 col-md-4">
         <select class="form-select" [(ngModel)]="selectedType" (change)="applyFilters()">
           <option value="all">All Types</option>
           <option value="Beach">Beach</option>
@@ -28,7 +30,8 @@
           <option value="Spiritual">Spiritual</option>
         </select>
       </div>
-      <div class="col-lg-3 col-md-6">
+
+      <div class="col-lg-3 col-md-4">
         <select class="form-select" [(ngModel)]="selectedPopularity" (change)="applyFilters()">
           <option value="all">All Popularity Levels</option>
           <option value="High">High</option>
@@ -36,12 +39,31 @@
           <option value="Low">Low</option>
         </select>
       </div>
+
+      <div class="col-lg-3 col-md-4">
+        <select class="form-select" [(ngModel)]="selectedSort" (change)="applyFilters()">
+          <option value="default">Sort By (Default)</option>
+          <option value="priceAsc">Price: Low to High</option>
+          <option value="priceDesc">Price: High to Low</option>
+          <option value="popularity">Popularity</option>
+        </select>
+      </div>
+
     </div>
   </div>
 
   <div class="row g-4">
     <div *ngFor="let dest of filteredDestinations" @cardAnimation class="col-lg-4 col-md-6 col-12">
       <div class="card destination-card h-100 shadow-sm border-0">
+        
+        <span class="popularity-badge badge" [ngClass]="{
+                'bg-danger': dest.popularity === 'High',
+                'bg-warning': dest.popularity === 'Medium',
+                'bg-secondary': dest.popularity === 'Low'
+              }">
+          {{ dest.popularity }}
+        </span>
+
         <img [src]="dest.image" class="card-img-top" [alt]="dest.name">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title fw-bold">{{ dest.name }}</h5>
