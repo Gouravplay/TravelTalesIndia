@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-
-// 1. Import your page components
-import { Home } from './pages/home/home'; // Assuming your class is named 'Home'
+import { Home } from './pages/home/home';
 import { DestinationComponent } from './pages/destination/destination';
+import { BookingPageComponent } from './pages/booking-page/booking-page';
 
-// 2. Define the routes in the 'routes' array
 export const routes: Routes = [
-    // When the URL is empty (e.g., http://localhost:4200), show the Home component
     { path: '', component: Home },
-
-    // When the URL is /destinations, show the DestinationComponent
     { path: 'destinations', component: DestinationComponent },
-    
-    // (Optional but recommended) Redirect any other URL back to the home page
+
+    // Route for when a destination is pre-selected
+    { path: 'booking/:id', component: BookingPageComponent }, 
+
+    // NEW: Route for when user selects a destination manually
+    { path: 'booking', component: BookingPageComponent },
+
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
