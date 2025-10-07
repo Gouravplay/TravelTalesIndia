@@ -4,6 +4,9 @@ section {
   padding-bottom: 5rem;
 }
 
+/* ============================================= */
+/* --- Section Heading Styles --- */
+/* ============================================= */
 h2.fw-bold {
   position: relative;
   display: inline-block;
@@ -11,7 +14,7 @@ h2.fw-bold {
   margin-bottom: 1rem !important;
 }
 
-h2.fw-bold::after {
+h2.fw-bold:not(.text-white)::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -22,9 +25,19 @@ h2.fw-bold::after {
   background-color: var(--bs-primary);
 }
 
+h2.fw-bold.text-white::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #ffffff;
+}
+
 /* --- Hero Section --- */
 .hero-bg {
-  /* CHANGED: Path now starts with / */
   background-image: url('/assets/images/beach.png');
   background-size: cover;
   background-position: center;
@@ -37,8 +50,7 @@ h2.fw-bold::after {
 
 /* --- Popular Destinations Section --- */
 .popular-destinations {
-  /* CHANGED: Path now starts with / */
-  background-image: url('/assets/images/people.png');
+  background-image: url('/assets/images/people.jpeg');
   background-size: cover;
   background-position: center;
   min-height: 80vh;
@@ -46,11 +58,201 @@ h2.fw-bold::after {
 
 /* --- Famous Foods Section --- */
 .famous-foods {
-  /* CHANGED: Path now starts with / */
-  background-image: url('/assets/images/food-texture.jpg');
+  background-image: url('/assets/images/food.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   min-height: 80vh;
 }
-/* ... rest of your CSS ... */
+
+.popular-destinations h2,
+.famous-foods h2 {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* --- Card Hover Effects --- */
+.card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* --- Our Services Section --- */
+.our-services .card {
+  border: none;
+}
+
+.service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #e7f1ff; 
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.our-services .card:hover .service-icon {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+
+/* --- Tourism Impact Section --- */
+.tourism-impact {
+  background-color: #f8ffae;
+}
+
+/* --- Button Enhancements --- */
+.btn {
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  filter: brightness(90%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ============================================= */
+/* --- Famous Foods Slider (NEW) --- */
+/* ============================================= */
+.slider-container {
+    position: relative;
+    padding: 0 50px; /* Space for arrows */
+}
+
+.slider-track {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar on Firefox */
+}
+
+.slider-track::-webkit-scrollbar {
+    display: none; /* Hide scrollbar on Chrome/Safari */
+}
+
+.slider-card {
+    flex: 0 0 90%;
+    max-width: 90%;
+    scroll-snap-align: center;
+    padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+    .slider-card {
+        flex-basis: 40%;
+        max-width: 40%;
+    }
+}
+
+@media (min-width: 992px) {
+    .slider-card {
+        flex-basis: 33.33%;
+        max-width: 33.33%;
+    }
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+.slider-arrow:hover {
+    background-color: #fff;
+}
+
+.slider-arrow.prev { left: 0; }
+.slider-arrow.next { right: 0; }
+
+/* ============================================= */
+/* --- Food Modal & Background Blur (NEW) --- */
+/* ============================================= */
+body.modal-open > *:not(.food-modal-overlay) {
+    filter: blur(8px);
+    transition: filter 0.3s ease-in-out;
+}
+
+.food-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+}
+
+.food-modal {
+    background: #fff;
+    border-radius: 15px;
+    max-width: 900px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.3s;
+}
+.close-button:hover {
+    color: #333;
+}
+.food-modal .modal-body {
+    padding: 2rem;
+}
+
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+/* --- Fix for image not covering in modal --- */
+.food-modal .row.g-0 .col-md-6 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This is the key property */
+}

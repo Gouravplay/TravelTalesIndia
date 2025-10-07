@@ -1,6 +1,6 @@
 <section class="hero-bg d-flex align-items-center text-center text-white">
   <div class="container">
-    <h1 class="display-4 fw-bold">Welcome to TravelTalesIndia</h1>
+    <h1 class="display-4 fw-bold">Welcome to TourTheWorld</h1>
     <p class="lead">Discover the beauty, culture, and diversity of India</p>
     <a routerLink="/destinations" class="btn btn-warning btn-lg mt-3">Start Exploring</a>
   </div>
@@ -8,7 +8,7 @@
 
 <section class="popular-destinations py-5">
   <div class="container">
-    <h2 class="text-center mb-4 text-black"><strong>Popular Destinations</strong></h2>
+    <h2 class="text-center mb-4 text-white"><strong>Popular Destinations</strong></h2>
     <div class="row text-center">
       <div *ngFor="let dest of popularDestinations" class="col-lg-4 col-md-6 mb-4">
         <div class="card shadow-sm h-100">
@@ -16,7 +16,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ dest.title }}</h5>
             <p class="card-text">{{ dest.description }}</p>
-            <a [routerLink]="dest.routerLink" class="btn btn-primary">Book Now</a>
+            <a [routerLink]="['/booking', dest.id]" class="btn btn-primary">Book Now</a>
           </div>
         </div>
       </div>
@@ -26,19 +26,26 @@
 
 <section class="famous-foods py-5 position-relative">
   <div class="background-overlay"></div>
-  <div class="container position-relative" style="z-index: 2;">
-    <h2 class="text-center mb-4 text-black"><strong>Famous Foods of India</strong></h2>
-    <div class="row text-center">
-      <div *ngFor="let food of famousFoods" class="col-lg-4 col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-          <img [src]="food.image" class="card-img-top img-fluid" [alt]="food.alt" />
-          <div class="card-body">
-            <h5 class="card-title">{{ food.title }}</h5>
-            <p class="card-text">{{ food.description }}</p>
-            <a [href]="food.link" class="btn btn-success">Taste It</a>
-          </div>
+  <div class="container-fluid position-relative" style="z-index: 2;">
+    <div class="text-center mb-4">
+        <h2 class="text-white"><strong>Famous Foods of India</strong></h2>
+    </div>
+    <div class="slider-container">
+        <div class="slider-track" #sliderTrack>
+            <div *ngFor="let food of famousFoods" class="slider-card">
+                <div class="card shadow-sm h-100">
+                    <img [src]="food.image" class="card-img-top img-fluid" [alt]="food.alt" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ food.title }}</h5>
+                        <p class="card-text">{{ food.description }}</p>
+                        <button (click)="openFoodModal(food)" class="btn btn-success">Taste It</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <button class="slider-arrow prev" (click)="scrollSlider(-1)">❮</button>
+        <button class="slider-arrow next" (click)="scrollSlider(1)">❯</button>
     </div>
   </div>
 </section>
@@ -105,3 +112,25 @@
     <a routerLink="/booking" class="btn btn-warning btn-lg">Book a Tour</a>
   </div>
 </section>
+
+<div *ngIf="selectedFood" class="food-modal-overlay" (click)="closeFoodModal()">
+  <div class="food-modal" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeFoodModal()">×</button>
+    
+    <div class="row g-0">
+      <div class="col-md-6">
+        <img [src]="selectedFood.image" class="img-fluid rounded-start" [alt]="selectedFood.title">
+      </div>
+      <div class="col-md-6 d-flex flex-column">
+        <div class="modal-body">
+          <h3 class="fw-bold">{{ selectedFood.title }}</h3>
+          <p class="text-muted">{{ selectedFood.longDescription }}</p>
+          <h5 class="fw-bold mt-4">Find It Here</h5>
+          <div class="map-container">
+            <iframe *ngIf="safeMapUrl" [src]="safeMapUrl" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

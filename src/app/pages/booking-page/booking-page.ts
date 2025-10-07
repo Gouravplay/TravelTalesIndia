@@ -64,11 +64,24 @@ export class BookingPageComponent implements OnInit {
   }
 
   onSubmitBooking(): void {
-    console.log('Booking Submitted!', {
+    const newBooking = {
       destination: this.selectedDestination?.name,
+      destinationId: this.selectedDestination?.id,
       details: this.bookingDetails,
-      totalPrice: this.totalPrice
-    });
-    alert(`Thank you for your booking to ${this.selectedDestination?.name}! Total cost: ${this.totalPrice}`);
+      totalPrice: this.totalPrice,
+      bookingDate: new Date().toISOString() // Add a timestamp for the booking
+    };
+
+    // 1. Get existing bookings from local storage, or create an empty array
+    const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+
+    // 2. Add the new booking to the array
+    existingBookings.push(newBooking);
+
+    // 3. Save the updated array back to local storage
+    localStorage.setItem('bookings', JSON.stringify(existingBookings));
+
+    console.log('Booking Saved to Local Storage!', newBooking);
+    alert(`Thank you for your booking to ${this.selectedDestination?.name}! Your booking has been saved.`);
   }
 }

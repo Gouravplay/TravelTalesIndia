@@ -7,9 +7,21 @@ import { ALL_DESTINATIONS } from '../data/destination-data';
 })
 export class DestinationService {
 
-  private destinations: Destination[] = ALL_DESTINATIONS;
+  private destinations: Destination[] = [];
 
-  constructor() { }
+  constructor() {
+    // Check if destinations are already in local storage
+    const storedDestinations = localStorage.getItem('destinations');
+
+    if (storedDestinations) {
+      // If yes, parse the string and load them
+      this.destinations = JSON.parse(storedDestinations);
+    } else {
+      // If no, load them from the data file and save to local storage
+      this.destinations = ALL_DESTINATIONS;
+      localStorage.setItem('destinations', JSON.stringify(this.destinations));
+    }
+  }
 
   // Method to get all destinations
   getDestinations(): Destination[] {
