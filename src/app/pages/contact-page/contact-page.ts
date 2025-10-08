@@ -1,17 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // <-- Import FormsModule for the form
+import { FormsModule, NgForm } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-contact-page',
   standalone: true,
-  imports: [CommonModule, FormsModule], // <-- Add FormsModule
+  imports: [CommonModule, FormsModule],
   templateUrl: './contact-page.html',
-  styleUrls: ['./contact-page.css']
+  styleUrls: ['./contact-page.css'],
+  animations: [
+    trigger('fieldErrorAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class ContactPageComponent {
+  @ViewChild('contactForm') contactForm!: NgForm;
 
-  // Object to hold the form's data
+  // CHANGED: Defined the properties for the form
   contactDetails = {
     name: '',
     email: '',
@@ -19,18 +29,14 @@ export class ContactPageComponent {
     message: ''
   };
 
-  // This method is called when the form is submitted
   onFormSubmit(): void {
-    console.log('Contact Form Submitted!', this.contactDetails);
-    // In a real application, you would send this data to a backend API.
-    alert('Thank you for contacting us! We will get back to you shortly.');
+    if (this.contactForm.invalid) {
+      this.contactForm.control.markAllAsTouched();
+      return;
+    }
     
-    // Optional: Reset the form after submission
-    this.contactDetails = {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    };
+    console.log('Contact Form Submitted!', this.contactDetails);
+    alert('Thank you for contacting us! We will get back to you shortly.');
+    this.contactForm.reset();
   }
 }

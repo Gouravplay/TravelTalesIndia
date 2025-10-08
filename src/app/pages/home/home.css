@@ -5,7 +5,7 @@ section {
 }
 
 /* ============================================= */
-/* --- Section Heading Styles --- */
+/* --- Section Heading Styles (Simplified) --- */
 /* ============================================= */
 h2.fw-bold {
   position: relative;
@@ -14,7 +14,8 @@ h2.fw-bold {
   margin-bottom: 1rem !important;
 }
 
-h2.fw-bold:not(.text-white)::after {
+/* This creates a BLUE underline for all headings */
+h2.fw-bold::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -23,17 +24,6 @@ h2.fw-bold:not(.text-white)::after {
   width: 60px;
   height: 3px;
   background-color: var(--bs-primary);
-}
-
-h2.fw-bold.text-white::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background-color: #ffffff;
 }
 
 /* --- Hero Section --- */
@@ -48,36 +38,10 @@ h2.fw-bold.text-white::after {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* --- Popular Destinations Section --- */
-.popular-destinations {
-  background-image: url('/assets/images/people.jpeg');
-  background-size: cover;
-  background-position: center;
-  min-height: 80vh;
-}
-
-/* --- Famous Foods Section --- */
+/* --- Popular Destinations & Famous Foods Sections (UPDATED) --- */
+.popular-destinations,
 .famous-foods {
-  background-image: url('/assets/images/food.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  min-height: 80vh;
-}
-
-.popular-destinations h2,
-.famous-foods h2 {
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-
-.background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  background-color: #ffffff;
 }
 
 /* --- Card Hover Effects --- */
@@ -132,11 +96,11 @@ h2.fw-bold.text-white::after {
 }
 
 /* ============================================= */
-/* --- Famous Foods Slider (NEW) --- */
+/* --- Famous Foods Slider --- */
 /* ============================================= */
 .slider-container {
     position: relative;
-    padding: 0 50px; /* Space for arrows */
+    padding: 0 50px;
 }
 
 .slider-track {
@@ -144,11 +108,11 @@ h2.fw-bold.text-white::after {
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Hide scrollbar on Firefox */
+    scrollbar-width: none;
 }
 
 .slider-track::-webkit-scrollbar {
-    display: none; /* Hide scrollbar on Chrome/Safari */
+    display: none;
 }
 
 .slider-card {
@@ -176,7 +140,7 @@ h2.fw-bold.text-white::after {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 50%;
     width: 45px;
@@ -189,14 +153,14 @@ h2.fw-bold.text-white::after {
 }
 
 .slider-arrow:hover {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .slider-arrow.prev { left: 0; }
 .slider-arrow.next { right: 0; }
 
 /* ============================================= */
-/* --- Food Modal & Background Blur (NEW) --- */
+/* --- Food Modal & Background Blur --- */
 /* ============================================= */
 body.modal-open > *:not(.food-modal-overlay) {
     filter: blur(8px);
@@ -250,9 +214,9 @@ body.modal-open > *:not(.food-modal-overlay) {
     border-radius: 10px;
     overflow: hidden;
 }
-/* --- Fix for image not covering in modal --- */
+
 .food-modal .row.g-0 .col-md-6 img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* This is the key property */
+  object-fit: cover;
 }

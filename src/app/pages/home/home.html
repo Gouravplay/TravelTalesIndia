@@ -8,7 +8,10 @@
 
 <section class="popular-destinations py-5">
   <div class="container">
-    <h2 class="text-center mb-4 text-white"><strong>Popular Destinations</strong></h2>
+    <div class="text-center">
+      <h2 class="fw-bold mb-3">Popular Destinations</h2>
+      <p class="lead text-muted mb-5">Explore the most loved places in India.</p>
+    </div>
     <div class="row text-center">
       <div *ngFor="let dest of popularDestinations" class="col-lg-4 col-md-6 mb-4">
         <div class="card shadow-sm h-100">
@@ -25,27 +28,26 @@
 </section>
 
 <section class="famous-foods py-5 position-relative">
-  <div class="background-overlay"></div>
   <div class="container-fluid position-relative" style="z-index: 2;">
-    <div class="text-center mb-4">
-        <h2 class="text-white"><strong>Famous Foods of India</strong></h2>
+    <div class="text-center">
+      <h2 class="fw-bold mb-3">Famous Foods of India</h2>
+      <p class="lead text-muted mb-5">Savor the authentic tastes of India.</p>
     </div>
     <div class="slider-container">
-        <div class="slider-track" #sliderTrack>
-            <div *ngFor="let food of famousFoods" class="slider-card">
-                <div class="card shadow-sm h-100">
-                    <img [src]="food.image" class="card-img-top img-fluid" [alt]="food.alt" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ food.title }}</h5>
-                        <p class="card-text">{{ food.description }}</p>
-                        <button (click)="openFoodModal(food)" class="btn btn-success">Taste It</button>
-                    </div>
-                </div>
+      <div class="slider-track" #sliderTrack>
+        <div *ngFor="let food of famousFoods" class="slider-card">
+          <div class="card shadow-sm h-100">
+            <img [src]="food.image" class="card-img-top img-fluid" [alt]="food.alt" />
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ food.title }}</h5>
+              <p class="card-text">{{ food.description }}</p>
+              <button (click)="openFoodModal(food)" class="btn btn-success">Taste It</button>
             </div>
+          </div>
         </div>
-
-        <button class="slider-arrow prev" (click)="scrollSlider(-1)">❮</button>
-        <button class="slider-arrow next" (click)="scrollSlider(1)">❯</button>
+      </div>
+      <button class="slider-arrow prev" (click)="scrollSlider(-1)">❮</button>
+      <button class="slider-arrow next" (click)="scrollSlider(1)">❯</button>
     </div>
   </div>
 </section>
@@ -55,7 +57,7 @@
     <h2 class="fw-bold mb-3">Our Services</h2>
     <p class="lead text-muted mb-5">We provide the best services to make your journey unforgettable.</p>
     <div class="row g-4">
-       <div class="col-md-4">
+      <div class="col-md-4">
         <div class="card border-0 shadow-sm p-4 h-100">
           <div class="service-icon text-primary mb-3">
             <i class="bi bi-briefcase-fill fs-1"></i>
@@ -116,7 +118,6 @@
 <div *ngIf="selectedFood" class="food-modal-overlay" (click)="closeFoodModal()">
   <div class="food-modal" (click)="$event.stopPropagation()">
     <button class="close-button" (click)="closeFoodModal()">×</button>
-    
     <div class="row g-0">
       <div class="col-md-6">
         <img [src]="selectedFood.image" class="img-fluid rounded-start" [alt]="selectedFood.title">
