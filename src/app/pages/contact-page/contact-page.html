@@ -40,26 +40,38 @@
       <!-- Right Column: Contact Form -->
       <div class="col-lg-7" data-aos="fade-left">
         <div class="form-container p-4 p-md-5">
-          <form #contactForm="ngForm" (ngSubmit)="onFormSubmit()">
+          <form #contactForm="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
             <div class="row g-4">
               <div class="col-md-6">
                 <label for="name" class="form-label">Your Name</label>
-                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="contactDetails.name" required>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="contactDetails.name" required #nameInput="ngModel">
+                <div *ngIf="nameInput.invalid && nameInput.touched" @fieldErrorAnimation class="form-text text-danger">
+                  Name is required.
+                </div>
               </div>
               <div class="col-md-6">
                 <label for="email" class="form-label">Your Email</label>
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contactDetails.email" required email>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contactDetails.email" required email #emailInput="ngModel">
+                <div *ngIf="emailInput.invalid && emailInput.touched" @fieldErrorAnimation class="form-text text-danger">
+                  Please enter a valid email address.
+                </div>
               </div>
               <div class="col-12">
                 <label for="subject" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject" [(ngModel)]="contactDetails.subject" required>
+                <input type="text" class="form-control" id="subject" name="subject" [(ngModel)]="contactDetails.subject" required #subjectInput="ngModel">
+                <div *ngIf="subjectInput.invalid && subjectInput.touched" @fieldErrorAnimation class="form-text text-danger">
+                  Subject is required.
+                </div>
               </div>
               <div class="col-12">
                 <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" id="message" name="message" rows="5" [(ngModel)]="contactDetails.message" required></textarea>
+                <textarea class="form-control" id="message" name="message" rows="5" [(ngModel)]="contactDetails.message" required #messageInput="ngModel"></textarea>
+                <div *ngIf="messageInput.invalid && messageInput.touched" @fieldErrorAnimation class="form-text text-danger">
+                  A message is required.
+                </div>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100 btn-lg" [disabled]="!contactForm.valid">Send Message</button>
+                <button type="submit" class="btn btn-primary w-100 btn-lg">Send Message</button>
               </div>
             </div>
           </form>

@@ -39,7 +39,10 @@ h2.fw-bold::after {
 }
 
 /* --- Popular Destinations & Famous Foods Sections (UPDATED) --- */
-.popular-destinations,
+.popular-destinations{
+  background-color: var(--bs-primary);
+  color: #fff;
+}
 .famous-foods {
   background-color: #ffffff;
 }

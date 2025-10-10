@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ToastrService } from 'ngx-toastr'; // 1. Import ToastrService
 
 @Component({
   selector: 'app-contact-page',
@@ -21,7 +22,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class ContactPageComponent {
   @ViewChild('contactForm') contactForm!: NgForm;
 
-  // CHANGED: Defined the properties for the form
   contactDetails = {
     name: '',
     email: '',
@@ -29,14 +29,31 @@ export class ContactPageComponent {
     message: ''
   };
 
+  // 2. Inject ToastrService in the constructor
+  constructor(private toastr: ToastrService) {}
+
+  // 3. Updated the submission logic completely
   onFormSubmit(): void {
     if (this.contactForm.invalid) {
+      // Show an error toast if the form is invalid
+      this.toastr.error('Please fill out all required fields correctly.', 'Invalid Form');
       this.contactForm.control.markAllAsTouched();
       return;
     }
     
-    console.log('Contact Form Submitted!', this.contactDetails);
-    alert('Thank you for contacting us! We will get back to you shortly.');
-    this.contactForm.reset();
+    // Save the submission to local storage
+    const newContactSubmission = {
+      ...this.contactDetails,
+      submittedAt: new Date().toISOString()
+    };
+    const existingSubmissions = JSON.parse(localStorage.getItem('contacts') || '[]');
+    existingSubmissions.push(newContactSubmission);
+    localStorage.setItem('contacts', JSON.stringify(existingSubmissions));
+
+    // Show a success toast instead of the old alert
+    this.toastr.success('Thank you for your message!', 'Sent Successfully');
+
+    // Reset the form after successful submission
+    this.contactForm.resetForm();
   }
 }

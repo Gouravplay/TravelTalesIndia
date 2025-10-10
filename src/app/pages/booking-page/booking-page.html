@@ -36,7 +36,7 @@
             <div class="col-md-6">
               <label for="email" class="form-label">Email Address</label>
               <input type="email" class="form-control" id="email" name="email" [(ngModel)]="bookingDetails.email" required email #emailInput="ngModel">
-               <div *ngIf="emailInput.invalid && emailInput.touched" @fieldErrorAnimation class="form-text text-danger">
+                <div *ngIf="emailInput.invalid && emailInput.touched" @fieldErrorAnimation class="form-text text-danger">
                 Please enter a valid email.
               </div>
             </div>

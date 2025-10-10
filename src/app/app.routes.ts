@@ -11,10 +11,11 @@ export const routes: Routes = [
     // Route for when a destination is pre-selected
     { path: 'booking/:id', component: BookingPageComponent }, 
 
-    // NEW: Route for when user selects a destination manually
+    // Route for when user selects a destination manually
     { path: 'booking', component: BookingPageComponent },
 
     { path: 'contact', component: ContactPageComponent },
 
+    // This is a wildcard route to catch any unknown URLs
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
