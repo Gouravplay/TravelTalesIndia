@@ -1,3 +1,5 @@
+/* src/app/pages/booking-page/booking-page.css (Updated) */
+
 .booking-page-container {
     background-color: #f8f9fa;
     padding: 2rem 0;
@@ -12,7 +14,7 @@
     background-color: #ffffff;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
-    position: sticky; /* Keeps summary in view on scroll */
+    position: sticky; /* This is great for DESKTOPS */
     top: 100px;
 }
 
@@ -24,4 +26,14 @@
     padding: 0.85rem 2.5rem;
     border-radius: 50px;
     font-weight: bold;
+}
+
+
+/* --- ADDED: Responsive adjustments for tablets and phones --- */
+@media (max-width: 991.98px) {
+    .summary-card {
+        /* On smaller screens, disable the sticky positioning. */
+        /* This allows it to scroll naturally with the rest of the page. */
+        position: static;
+    }
 }

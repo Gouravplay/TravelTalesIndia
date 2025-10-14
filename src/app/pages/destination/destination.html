@@ -1,3 +1,4 @@
+<!-- src/app/pages/destination/destination.html (Updated) -->
 <div class="container my-5">
   
   <div class="text-center mb-5">
@@ -6,9 +7,11 @@
   </div>
 
   <div class="filter-bar card shadow-sm p-3 mb-5 bg-light rounded">
+    <!-- CHANGE: Updated column classes for a better tablet layout -->
     <div class="row g-3 align-items-center">
       
-      <div class="col-lg-4 col-md-12">
+      <!-- Search Bar -->
+      <div class="col-12 col-md-6 col-lg-4">
         <div class="input-group">
           <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
           <input 
@@ -20,7 +23,8 @@
         </div>
       </div>
 
-      <div class="col-lg-2 col-md-4">
+      <!-- Type Filter -->
+      <div class="col-12 col-md-6 col-lg-2">
         <select class="form-select" [(ngModel)]="selectedType" (change)="applyFilters()">
           <option value="all">All Types</option>
           <option value="Beach">Beach</option>
@@ -31,7 +35,8 @@
         </select>
       </div>
 
-      <div class="col-lg-3 col-md-4">
+      <!-- Popularity Filter -->
+      <div class="col-12 col-md-6 col-lg-3">
         <select class="form-select" [(ngModel)]="selectedPopularity" (change)="applyFilters()">
           <option value="all">All Popularity Levels</option>
           <option value="High">High</option>
@@ -40,7 +45,8 @@
         </select>
       </div>
 
-      <div class="col-lg-3 col-md-4">
+      <!-- Sort Filter -->
+      <div class="col-12 col-md-6 col-lg-3">
         <select class="form-select" [(ngModel)]="selectedSort" (change)="applyFilters()">
           <option value="default">Sort By (Default)</option>
           <option value="priceAsc">Price: Low to High</option>
@@ -52,15 +58,16 @@
     </div>
   </div>
 
+  <!-- This card grid is already perfectly responsive -->
   <div class="row g-4">
     <div *ngFor="let dest of filteredDestinations" @cardAnimation class="col-lg-4 col-md-6 col-12">
       <div class="card destination-card h-100 shadow-sm border-0">
         
         <span class="popularity-badge badge" [ngClass]="{
-                'bg-danger': dest.popularity === 'High',
-                'bg-warning': dest.popularity === 'Medium',
-                'bg-secondary': dest.popularity === 'Low'
-              }">
+              'bg-danger': dest.popularity === 'High',
+              'bg-warning': dest.popularity === 'Medium',
+              'bg-secondary': dest.popularity === 'Low'
+            }">
           {{ dest.popularity }}
         </span>
 

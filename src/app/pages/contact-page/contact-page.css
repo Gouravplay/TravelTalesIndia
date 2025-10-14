@@ -1,3 +1,5 @@
+/* src/app/pages/contact-page/contact-page.css (Updated) */
+
 .contact-header {
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/assets/images/contanct.png');
     background-size: cover;
@@ -41,10 +43,25 @@
 
 .map-container {
     width: 100%;
-    filter: grayscale(80%); /* Gives the map a stylish, muted look */
+    filter: grayscale(80%);
     transition: filter 0.3s ease;
 }
 
 .map-container:hover {
     filter: grayscale(0%);
+}
+
+
+/* --- ADDED: Responsive adjustments for phones and tablets --- */
+@media (max-width: 767.98px) {
+    .contact-header h1 {
+        /* Make the main title smaller on mobile to prevent awkward line breaks */
+        font-size: 2.5rem; 
+    }
+
+    .contact-info-item, .social-icons {
+        /* Center-align the contact info and social icons on mobile for a cleaner look */
+        justify-content: center !important;
+        text-align: center;
+    }
 }
